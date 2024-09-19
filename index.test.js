@@ -1,3 +1,8 @@
+
+const { sequelize } = require("./db");
+const { Band, Musician, Song } = require("./index");
+
+describe("Band, Musician, and Song Models", () => {
 const { sequelize } = require('./db');
 const { Band, Musician, Song } = require('./index');
 
@@ -85,6 +90,46 @@ describe('Band, Musician, and Song Models', () => {
     await sequelize.sync({ force: true });
   });
 
+  test("can create a Band", async () => {
+    const band = await Band.create({ name: "Beatles", genre: "rock" });
+
+    // TODO - test creating a band
+    expect(band.name).toBe("Beatles");
+    expect(band.genre).toBe("rock");
+  });
+
+  test("can create a Musician", async () => {
+    // TODO - test creating a musician
+    expect("NO TEST").toBe("EXPECTED VALUE HERE");
+  });
+
+  test("can update a Band", async () => {
+    const band = await Band.create({ name: "Beatles", genre: "rock" });
+    band.name = "The Beatles";
+    band.genre = "classic rock";
+    await band.save();
+    const updatedBand = await Band.findByPk(band.id);
+    // TODO - test updating a band
+    expect(updatedBand.name).toBe("The Beatles");
+    expect(updatedBand.genre).toBe("classic rock");
+  });
+
+  test("can update a Musician", async () => {
+    // TODO - test updating a musician
+    expect("NO TEST").toBe("EXPECTED VALUE HERE");
+  });
+
+  test("can delete a Band", async () => {
+    const band = await Band.create({ name: "Beatles", genre: "rock" });
+    await band.destroy();
+    const deletedBand = await Band.findByPk(band.id);
+    // TODO - test deleting a band
+    expect(deletedBand).toBeNull();
+  });
+
+  test("can delete a Musician", async () => {
+    // TODO - test deleting a musician
+    expect("NO TEST").toBe("EXPECTED VALUE HERE");
   test('can create a Band', async () => {
     const band = await Band.create({ name: 'The Beatles' });
     expect(band.name).toBe('The Beatles');
